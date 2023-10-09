@@ -1,12 +1,18 @@
+'use client'
+
 import Link from 'next/link'
 import { useState } from "react"
 import { useRouter } from 'next/router';
 
+import Usuario from 'src/datos/usuarios.json'
+import Admin from 'src/datos/admins.json'
 
 const Logear = () => {
   const [state, setState] = useState(
-    { usuario: "", contrasena: ""}
-  )
+    { 
+      usuario: "", 
+      contrasena: ""
+    });
   const router = useRouter();
 
   // Función para manejar cambios en los campos de entrada
@@ -22,7 +28,7 @@ const Logear = () => {
     const { usuario, contrasena } = state;
   
     // Verificar si es un administrador
-    const admin = Object.values(Admins).find(
+    const admin = Object.values(Admin).find(
       admin => admin.correo === usuario && admin.contrasena === contrasena
     );
   
@@ -33,10 +39,10 @@ const Logear = () => {
   
     if (admin) {
       // Usuario es un administrador
-      router.push(`/blog/admin/${admin.correo}/paginaPrincipalAdmin`);
+      router.push(`/blog/admin/${admin.correo}/loginAdmin`);
     } else if (alumno && alumno.correo === usuario && alumno.password === contrasena) {
       // Usuario es un alumno
-      router.push(`/blog/alumno/${alumno.correo}/paginaPrincipalAlumno`);
+      router.push(`/blog/alumno/${alumno.correo}/loginUsuario`);
     } else {
       // No coincide la contraseña o usuario
       alert('No coincide la contraseña o usuario');
