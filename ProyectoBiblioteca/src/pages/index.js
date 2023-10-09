@@ -1,11 +1,13 @@
 'use client'
 
-import Link from 'next/link'
-import { useState } from "react"
+import Link from 'next/link';
+import { useState } from "react";
 import { useRouter } from 'next/router';
 
-import Usuario from 'src/datos/usuarios.json'
-import Admin from 'src/datos/admins.json'
+import './index.module.css';
+
+import Usuario from 'src/datos/usuarios.json';
+import Admin from 'src/datos/admins.json';
 
 const Logear = () => {
   const [state, setState] = useState(
@@ -51,7 +53,17 @@ const Logear = () => {
 
   return (
     <>
-      <div className="title">Sistema de reserva de libros</div>
+    <div className="Login" style={{width: 1280, height: 720, position: 'relative', background: 'white'}}>
+      <div className="title" style={{
+  color: '#000',
+  textAlign: 'center',
+  fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+  fontSize: '36px',
+  fontStyle: 'normal',
+  fontWeight: 500,
+  lineHeight: '20px',
+  marginBottom: '70px' /* Ajusta el margen inferior del título */
+}}>Sistema de reserva de libros</div>
       <div className="container">
         <div className="form-container">
           <form onSubmit={validarLogeo}> {/* Agregamos onSubmit para manejar el envío del formulario */}
@@ -73,6 +85,7 @@ const Logear = () => {
             </div>
           </form>
         </div>
+      </div>
       </div>
     </>
   )
