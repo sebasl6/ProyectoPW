@@ -4,8 +4,6 @@ import Link from 'next/link';
 import { useState } from "react";
 import { useRouter } from 'next/router';
 
-import './index.module.css';
-
 import Usuario from 'src/datos/usuarios.json';
 import Admin from 'src/datos/admins.json';
 
