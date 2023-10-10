@@ -57,7 +57,7 @@ const Logear = () => {
       <div className="title" style={{
   color: '#000',
   textAlign: 'center',
-  fontFamily: "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif",
+  fontFamily: "Roboto",
   fontSize: '36px',
   fontStyle: 'normal',
   fontWeight: 500,
@@ -80,7 +80,7 @@ const Logear = () => {
             </div>
 
             <div className="button-container">
-              <Link href="/register"><button className="login-button">Registrar usuario</button></Link>
+              <Link href="./register"><button className="login-button">Registrar usuario</button></Link>
               <button className="register-button" type="submit">Ingresar</button> {/* Cambiamos el botón a type="submit" para que active onSubmit */}
             </div>
           </form>
