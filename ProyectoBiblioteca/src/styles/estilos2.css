@@ -1,7 +1,7 @@
 /* Estilos CSS para el encabezado */
 body {
-  margin: 0;
-  overflow: hidden; 
+  margin: 0; /* Elimina los márgenes predeterminados del body */
+  overflow: hidden; /* Oculta las barras de desplazamiento */
 }
 
 .header {
@@ -37,10 +37,10 @@ body {
 /* Estilo para el primer sector */
 .contenidoizquierda {
   background-color: #c8c0c0;
-  height: calc(100vh - 64px); 
+  height: calc(100vh - 64px); /* Ajustamos la altura para dejar espacio para el header */
   width: 10%;
   position: absolute;
-  top: 64px; 
+  top: 64px; /* Para que esté debajo del header */
   left: 0;
 }
 
@@ -64,46 +64,46 @@ body {
 /* Estilo para los enlaces dentro de la lista */
 .opciones ul {
   font-size: 20px;
-  list-style: none; 
-  padding: 0;
-  display: flex; 
-  flex-direction: column; 
-  justify-content: flex-start; 
-  align-items: left;
-  height: 100%; 
+  list-style: none; /* Elimina las viñetas */
+  padding: 0; /* Elimina el espacio interno en la lista */
+  display: flex; /* Usar flexbox para centrar vertical y horizontalmente */
+  flex-direction: column; /* Apilar enlaces verticalmente */
+  justify-content: flex-start; /* Alinear arriba verticalmente */
+  align-items: left; /* Centrar horizontalmente */
+  height: 100%; /* Ocupar todo el espacio vertical disponible */
 }
 
 /* Estilo para los enlaces dentro de la lista sin subrayado */
 .opciones ul li a {
-  text-decoration: none; 
-  color: rgb(93, 1, 93); 
-  line-height: 2.5;
-  margin-left: 40px; 
+  text-decoration: none; /* Elimina el subrayado */
+  color: rgb(93, 1, 93); /* Color morado */
+  line-height: 2.5; /* Interlineado de 1.5 */
+  margin-left: 40px; /* Agrega margen izquierdo para mover al centro */
   font-weight: bold;
 }
 
 /* Estilo para centrar el texto "Biblio v1.0.1-Alpha" en la parte inferior */
 .version {
   position: absolute;
-  bottom: 10px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  margin: 0; 
-  font-size: 14px;
+  bottom: 10px; /* Espacio desde la parte inferior */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translateX(-50%); /* Centrar horizontalmente */
+  margin: 0; /* Elimina el margen */
+  font-size: 14px; /* Tamaño de fuente */
   font-weight: bold;
-  color: #000000;
-  width: 200px; 
-  text-align: center;
+  color: #000000; /* Color de texto (puedes cambiarlo a tu preferencia) */
+  width: 200px; /* Ajusta el ancho según tu preferencia */
+  text-align: center; /* Centra el texto horizontalmente */
 }
 
 /* Estilo para la sección título */
 .seccion-titulo {
-  padding: 20px; 
+  padding: 20px; /* Aumenta el espacio interno para hacer el título más grande */
 }
 
 .seccion-titulo h2 {
   margin: 0;
-  font-size: 24px; 
+  font-size: 24px; /* Aumenta el tamaño del texto del título */
   font-weight: bold;
 }
 
@@ -115,7 +115,7 @@ body {
   width: 1550px;
   height: 300px;
   background-color: #e1ccf0;
-  margin-bottom: 30px; 
+  margin-bottom: 30px; /* Aumenta el margen inferior para extender el espacio */
   padding: 20px;
 }
 
@@ -124,41 +124,43 @@ body {
   width: 1550px;
   height: 640px;
   background-color: #e1ccf0;
-  margin-bottom: 30px; 
+  margin-bottom: 30px; /* Aumenta el margen inferior para extender el espacio */
 }
 
 .seccion-titulo-resultados {
-  display: flex; 
-  justify-content: space-between; 
-  align-items: center; 
-  padding: 20px;
+  display: flex; /* Utilizamos flexbox para alinear elementos horizontalmente */
+  justify-content: space-between; /* Coloca el título a la izquierda y el botón a la derecha */
+  align-items: center; /* Centra verticalmente los elementos */
+  padding: 20px; /* Añade espacio interno para separar el contenido */
   margin-top: 30px;
 }
 .titulo h2{
   margin-left: -20px;
 }
 .seccion-titulo-resultados .titulo {
-  flex: 1; 
+  flex: 1; /* Ocupa el espacio disponible */
 }
 
+
+/* Estilo para la sección de perfil */
 .seccion-perfil {
   display: flex;
-  align-items: center; 
+  align-items: center; /* Centrar verticalmente */
 }
 
 /* Estilo para la imagen y el botón de carga */
 .imagen-admin {
-  flex: 1; 
-  text-align: center; 
+  flex: 1; /* Ocupa todo el espacio disponible */
+  text-align: center; /* Centrar horizontalmente */
 }
 
 #imagenAdmin {
-  max-width: 100%;
-  max-height: 200px; 
+  max-width: 100%; /* Ajusta el tamaño máximo de la imagen */
+  max-height: 200px; /* Ajusta la altura máxima de la imagen según tus necesidades */
 }
 
 input[type="file"] {
-  display: none; 
+  display: none; /* Oculta el input de carga por defecto */
 }
 
 label[for="cargarImagen"] {
@@ -172,19 +174,19 @@ label[for="cargarImagen"] {
 
 /* Estilo para las opciones */
 .opciones2 {
-  flex: 2;
+  flex: 2; /* Ocupa el espacio restante */
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center; /* Centrar horizontalmente */
   height: 600px;
 }
 
 .opciones-superior {
   border-radius: 12px;
   display: flex;
-  justify-content: space-around; 
-  background-color: white; 
-  border: 1px solid #6750A4; 
+  justify-content: space-around; /* Espaciado uniforme entre las opciones */
+  background-color: white; /* Fondo morado para opciones superiores */
+  border: 1px solid #6750A4; /* Borde morado alrededor de opciones superiores */
   width: 800px;
 }
 
@@ -207,8 +209,8 @@ label[for="cargarImagen"] {
 }
 
 .opcion-activa {
-  color: 6750A4;
-  border-bottom: 4px solid #6750A4; 
+  color: 6750A4; /* Color del texto morado en el botón activo */
+  border-bottom: 4px solid #6750A4; /* Línea inferior morada en el botón activo */
   font-weight: bold;
 }
 
@@ -249,19 +251,19 @@ label[for="cargarImagen"] {
 
 .button-container-2 {
   display: flex;
-  justify-content: center; 
+  justify-content: center; /* Centrar horizontalmente */
   margin-top: 10px;
 }
 
 .register-button-2 {
   color: purple;
   font-weight: bold;
-  padding: 20px 0;
+  padding: 20px 0; /* Ajusta el padding vertical para hacer el fondo más largo al 100% */
   border-radius: 30px;
-  width: 100%;
-  max-width: 300px; 
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 300px; /* Establece un ancho máximo si lo deseas */
   margin-left: 50px;
-  border-color: #5e5b5b;
+  border-color: #5e5b5b; /* Quita la transparencia del color */
   background-color: #e1ccf0;
 }
 
