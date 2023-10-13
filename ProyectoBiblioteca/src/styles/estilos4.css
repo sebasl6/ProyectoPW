@@ -1,0 +1,123 @@
+.seccion-resultados-alum {
+    margin: 0px;
+    width: 1600px;
+    height: 400px;
+    background-color: #e1ccf0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-input-4 {
+    width: 70%;
+    height: 40px;
+    padding: 10px;
+    border: 2px solid purple;
+    border-radius: 5px;
+    padding-left: 30px;
+    outline: none;
+    background-color: #e1ccf0;
+}
+
+.seccion-resultados-alum {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+/* Estilos para la casilla de búsqueda */
+.casilla-para-escribir {
+    width: 280%;
+}
+
+.checkbox-boton {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+.checkbox-titulo {
+    font-family: Roboto;
+    color: #6750A4;
+}
+.chexboxx{
+    display: block;
+}
+/* Estilos para los checkboxes */
+.chexboxx input[type="checkbox"] {
+    margin-bottom: 20px;
+    border: 22332px solid #e1ccf0; 
+    padding: 5px; 
+  }
+
+
+/* Estilos para los botones */
+.botones {
+    position: absolute;
+   margin-top: 330px;
+   margin-left: 130px;
+  }
+/* Estilos para los botones */
+.boton-limpiar,
+.boton-buscar {
+  color: purple;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  padding: 20px 40px;
+  border-radius: 30px;
+  transition: background-color 0.3s, color 0.3s;
+  width: auto;
+  margin-right: 10px; 
+}
+
+/* Estilo cuando el cursor está sobre el botón */
+.boton-limpiar:hover,
+.boton-buscar:hover {
+  background-color: purple; 
+  color: white; 
+}
+
+
+.paginacion-2 {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 180px;
+}
+
+/* Estilos para los botones de paginación */
+.paginacion-2 button {
+    margin-left: 10px;
+}
+
+.paginacion-2 button {
+    border: none;
+    font-weight: bold;
+    font-size: 19px;
+}
+
+.seccion-info-busqueda {
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+  }
+  
+
+  
+  .seccion-info-busqueda button {
+    margin-top: -10px;
+    margin-right: 20px;
+    background-color: white;
+    width: 170px;
+    height: 50px;
+    color: #6750A4;
+    border-radius: 20px;
+    padding: 15px;
+    border-color: #6750A4 ;
+  }
+  .titulo h3{
+    margin-left: 0px;
+    margin-top: -30px;
+    font-size: 12px;
+  }
