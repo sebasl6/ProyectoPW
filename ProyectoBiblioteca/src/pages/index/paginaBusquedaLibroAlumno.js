@@ -37,7 +37,7 @@ const Principal = () => {
         }
     }, [busqueda]);
 
-    //-----------------------------LOGICA DE PAGINACION------------------------------------
+    //Paginacion
     const irAPaginaSiguiente = () => {
         if ((paginaActual + 1) * resultadosPorPagina <= coincidencias.length) {
             setPaginaActual(paginaActual + 1);
@@ -55,7 +55,7 @@ const Principal = () => {
     const indiceFin = indiceInicio + resultadosPorPagina;
 
 
-    //-------------------------------------------------------------------------------------
+    //
     const doVolver = async () => {
         window.location.href = `/index/alumno/${usuario}/paginaResultadosAlumno`;
     };
@@ -64,7 +64,7 @@ const Principal = () => {
         window.location.href = `/index/alumno/${usuario}/paginaUltimasReservas`;
     };
 
-    //---------------------------CALENDARIO-----------------------------------------
+    //Calendario
 
     const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
@@ -73,7 +73,7 @@ const Principal = () => {
         setShowCalendar(!showCalendar);
     };
 
-    //-------------------------------------------------------------------------------
+    //
 
     const [flag, setFlag] = useState(false);
     const [libroSeleccionado, setLibroSeleccionado] = useState(null);
@@ -159,23 +159,17 @@ const Principal = () => {
                 portada: libroSeleccionado["imagen-portada-url"]
             };
 
-            // Agrega la nueva reserva al arreglo existente
-            const updatedReservas = [...reservas, reserva]; // Usar `reservas` en lugar de `datos`
-
-            // Actualiza el estado de las reservas con las reservas actualizadas
+            const updatedReservas = [...reservas, reserva]; 
             setReservas(updatedReservas);
-
-            // Realiza una solicitud POST a la API para agregar la reserva
             try {
                 const response = await fetch('/api/actualizarReserva/escribir', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(updatedReservas), // Usar `updatedReservas` en lugar de `datos`
+                    body: JSON.stringify(updatedReservas),
                 });
-                editStats();//edita los stats de la biblioteca
-                // Después de realizar la reserva, obtén las reservas actualizadas
+                editStats();
                 obtenerReservas();
             } catch (error) {
                 console.error('Error al realizar la solicitud API:', error);
@@ -229,14 +223,10 @@ const Principal = () => {
                         </div>
                         <div className="seccion-rectangular-gris">
                             {coincidencias.slice(indiceInicio, indiceFin).map((libro, index) => {
-                                // Verifica si existe una reserva para el libro
                                 const reservaExistente = reservas.find(
                                     (reserva) => reserva && reserva.ISBN13 === libro.ISBN13
                                 );
-
-                                // Comprueba si el botón debe estar deshabilitado
                                 const isBotonDeshabilitado = !!reservaExistente && reservaExistente.disponibilidad === 1;
-
                                 return (
                                     <div className="bloque-libro" key={index}>
                                         <div className="titulo-libro">
@@ -249,16 +239,16 @@ const Principal = () => {
                                                 >
                                                     <img src="/media.png" alt="Icono XD" className="icono-xd"
                                                         style={{
-                                                            width: '420px', // Ajusta el ancho máximo de la imagen
-                                                            maxHeight: '300px', // Ajusta la altura máxima de la imagen según tus necesidades
+                                                            width: '420px', 
+                                                            maxHeight: '300px',
                                                         }} />
                                                     <img
                                                         src={libro["imagen-portada-url"]}
                                                         alt="Portada del libro"
                                                         className="portada-libro"
                                                         style={{
-                                                            maxWidth: '100%', // Ajusta el ancho máximo de la imagen
-                                                            maxHeight: '300px', // Ajusta la altura máxima de la imagen según tus necesidades
+                                                            maxWidth: '100%', 
+                                                            maxHeight: '300px',
                                                         }}
                                                     />
                                                 </a>
