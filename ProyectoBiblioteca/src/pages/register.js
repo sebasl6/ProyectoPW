@@ -6,8 +6,7 @@ import { useState } from "react"
 
 const Formulario = () => {
   var data
-  //acordarme del useState
-  //ESTADO para manejar validación de contraseñas
+  //Validación de contraseñas
   const [isValid, setIsValid] = useState(true)
 
   const [state, setState] = useState(
@@ -33,7 +32,6 @@ const Formulario = () => {
     for (let [key, value] of Object.entries(state)) {
       formData.append(key, value)
     }
-    //Una vez que se ha cargado el formData, se envia el formulario normalmente usando fetch (backend)...
     console.log(formData)
 
     // Redirigir a la página "/login" si las contraseñas coinciden
@@ -109,18 +107,13 @@ const Formulario = () => {
   }
 
   
-
-
- 
   return (
     <>
       <div className="title">Sistema de Reserva de Libros</div>
       <div className="subtitle">Registro de Usuario</div> {/* Movido debajo del título */}
       <div className="container">
         <form onSubmit={mngmtSubmit}>
-          {/* Centrar todas las columnas y el botón horizontalmente */}
           <div className="center-container">
-            {/* Primera columna con 4 elementos */}
             <div className="column">
               <div className="columna-subtitulo" >Datos personales</div>
               <div className="input-container" onSubmit={mngmtSubmit}>
@@ -140,8 +133,7 @@ const Formulario = () => {
                 <input className="form-input" type="text" id="nroDocumento" name="nroDocumento" onChange={mngmtChange} value={state.nroDocumento} required />
               </div>
             </div>
-
-            {/* Segunda columna con 3 elementos y el botón */}
+  
             <div className="column">
               <div className='columna-subtitulo' >Datos de la cuenta</div>
               <div className="input-container" onSubmit={mngmtSubmit}>
