@@ -50,7 +50,7 @@ const Logear = () => {
       <div className="title">Sistema de reserva de libros</div>
       <div className="container">
         <div className="form-container">
-          <form onSubmit={validarLogeo}> {/* Agregamos onSubmit para manejar el envío del formulario */}
+          <form onSubmit={validarLogeo}> 
             <div className="input-container">
               <label className="form-label" htmlFor="usuario">Usuario o correo:</label>
               <input className="form-input" type="text" id="usuario" name="usuario" onChange={mngmtChange} value={state.usuario} required/>
@@ -65,7 +65,7 @@ const Logear = () => {
 
             <div className="button-container">
               <Link href="/register"><button className="login-button">Registrar usuario</button></Link>
-              <button className="register-button" type="submit">Ingresar</button> {/* Cambiamos el botón a type="submit" para que active onSubmit */}
+              <button className="register-button" type="submit">Ingresar</button>
             </div>
           </form>
         </div>
