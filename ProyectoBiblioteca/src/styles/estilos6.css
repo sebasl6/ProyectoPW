@@ -40,8 +40,8 @@
     border-radius: 100%;
     margin-top: -50px;
     margin-left: 475px;
-    position: relative; 
-    z-index: 2;
+    position: relative; /* Agrega esta línea */
+    z-index: 2; /* Puedes ajustar el valor de z-index según sea necesario */
 }
   .circuloXd img{
     margin-top: 7px;
@@ -51,8 +51,8 @@
     background-color: #e1ccf0;
     width: 100%;
     height: 450px;
-    display: flex; 
-    justify-content: space-between; 
+    display: flex; /* Utilizamos flexbox para alinear los elementos */
+    justify-content: space-between; /* Distribuye el espacio horizontalmente */
   }
   .main-content-3 {
     margin-left: 14vh;
@@ -78,13 +78,14 @@
 
 
 .infoderecha h4 {
-    margin: 0; 
-    font-weight: bold; 
+    margin: 0; /* Elimina los márgenes predeterminados de los encabezados */
+    font-weight: bold; /* Establece el texto como negrita */
 }
 /* Estilos para 'izqheader' (el encabezado del lado izquierdo) */
+/* Estilos para 'izqheader' (el encabezado del lado izquierdo) */
 .izqheader {
-    margin-bottom: 10px; 
-    width: 100%;
+    margin-bottom: 10px; /* Espacio entre el encabezado y el contenido debajo */
+    width: 100%; /* Ocupa todo el ancho disponible en 'infoizquierda' */
 }
 .izqheader p{
     margin-left: 100px;
@@ -94,9 +95,9 @@
 }
 
 .debajoheader {
-    display: flex; 
-    align-items: center; 
-    width: 100%; 
+    display: flex; /* Mostrar elementos en una fila */
+    align-items: center; /* Centrar verticalmente los elementos */
+    width: 100%; /* Ocupa todo el ancho disponible en 'infoizquierda' */
 }
 
 /* Estilos para la descripción del libro en 'debajoheader' */
@@ -106,12 +107,13 @@
     font-family: Roboto;
 }
 
+/* Asegúrate de eliminar el ancho fijo en '.infoderecha' para que 'infoizquierda' ocupe el espacio restante */
 /* Estilos para 'infoderecha' */
 .infoderecha {
-    flex: 1; 
+    flex: 1; /* Ocupar el espacio disponible en el lado derecho */
 }
 .portada-libro-2 {
-    float: left; 
+    float: left; /* Alinea la imagen a la izquierda */
     margin-left: 50px;
     margin-top: 40px;
     width: 300px;
@@ -119,7 +121,7 @@
 }
 /* Estilos para el encabezado 'Editorial' en 'infoderecha' */
 .infoderecha h8 {
-    font-weight: 10;
+    font-weight: 10; /* Establecer el texto como negrita */
     color:rgb(99, 99, 99);
     margin-left: 40px;
     font-size: 15px;
