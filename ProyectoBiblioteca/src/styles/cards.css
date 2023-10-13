@@ -1,4 +1,7 @@
+/* Estilo para el contenedor con clase "seccion-igual-1" */
 
+
+/* Estilo para el título dentro de "seccion-igual-1" */
 .titulo_seccion {
     font-size: 24px;
     font-weight: bold;
@@ -8,11 +11,13 @@
     padding-left: 15px;
 }
 
+/* Estilo para el contenedor de cartas con clase "cartas_fila" */
 .cartas_fila {
-    display: flex; 
+    display: flex;  /* Alinear las cartas en la misma línea */
     margin-bottom: 3%;
 }
 
+/* Estilo para las cartas con clase "carta" dentro de "cartas_fila" */
 .cartas_fila .carta {
     width: calc(50% - 10px);
     height: 150px;
@@ -25,6 +30,7 @@
     background-color: #FEF7FF;
 }
 
+/* Estilo para el contenido de las cartas con clase "contenido" dentro de "carta" */
 .cartas_fila .carta .contenido {
     padding: 20px;
     padding-top: auto;
@@ -43,14 +49,17 @@
 
 }
 
+/* Estilo para la imagen dentro del contenedor de imagen */
 .cartas_fila .carta .imagen img.icono_default {
     max-width: 150px;
     max-height: 100%;
     border-radius: 10px;
 }
 
+/* Estilo para el enlace "Ver todo" dentro de "seccion-igual-1" */
 .seccion-igual-1 .ver-todo {
     position: relative;
+    /* Establece la posición absoluta */
     text-decoration: none;
     color: black;
     font-family: Roboto;
@@ -83,9 +92,9 @@
     flex-grow: 1;
     width: 1550px;
     background-color: #e1ccf0;
-    margin-bottom: 30px;
+    margin-bottom: 30px; /* Aumenta el margen inferior para extender el espacio */
     padding: 50px;
-    max-height: 650px;
+    max-height: 650px; /* Establece una altura mínima igual a la altura de la ventana del navegador */
     overflow-y: auto;
 
   }
