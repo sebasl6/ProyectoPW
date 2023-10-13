@@ -1,49 +1,57 @@
-import '../styles/estilos1.css'
-import '../styles/estilos2.css'
-import '../styles/estilos3.css'
-import '../styles/estilos4.css'
-import '../styles/estilos5.css'
-import '../styles/estilos6.css'
-import '../styles/cards.css'
+import React, { useEffect, useState } from 'react';
+import App from 'next/app';
 
-import { AppProps } from 'next/app'
-import { DemoProvider } from 'src/pages/context/demo'
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import { useEffect, useState } from 'react';
+import '../styles/estilos1.css';
+import '../styles/estilos2.css';
+import '../styles/estilos3.css';
+import '../styles/estilos4.css';
+import '../styles/estilos5.css';
+import '../styles/estilos6.css';
+import '../styles/cards.css';
 
-export default function MyApp({ Component, pageProps }) {
-  const [datos, setDatos] = useState([]);
+import { DemoProvider } from './context/demo';
 
-  async function escribir() {
-    const opciones1 = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-    };
-    const peticion2 = await fetch('/api/actualizarReserva/leer', opciones1);
-    let data = await peticion2.json();
-    const fechaActual = new Date();
-    const reservasFiltradas = data.filter(reserva => new Date(reserva.fechaentrega) >= fechaActual);
-
-    const opciones = {
-      method: 'POST',
-      body: JSON.stringify(reservasFiltradas), 
-      headers: { 'Content-Type': 'application/json' }
-    }
-
-    const peticion = await fetch('/api/actualizarReserva/escribir', opciones);
-    let rpta = await peticion.json();
-    console.log(rpta);
-    setDatos(reservasFiltradas);
-  }
+function MyApp({ Component, pageProps }) {
+  const [reservations, setReservations] = useState([]);
 
   useEffect(() => {
-    escribir();
+    async function fetchAndProcessReservations() {
+      try {
+        const fetchDataOptions = {
+          method: 'GET',
+          headers: { 'Content-Type': 'application/json' },
+        };
+
+        const response = await fetch('/api/actualizarReserva/leer', fetchDataOptions);
+        const rawData = await response.json();
+
+        const currentDate = new Date();
+        const upcomingReservations = rawData.filter(reservation => new Date(reservation.fechaentrega) >= currentDate);
+
+        const writeDataOptions = {
+          method: 'POST',
+          body: JSON.stringify(upcomingReservations),
+          headers: { 'Content-Type': 'application/json' },
+        };
+
+        const writeResponse = await fetch('/api/actualizarReserva/escribir', writeDataOptions);
+        const result = await writeResponse.json();
+        console.log(result);
+
+        setReservations(upcomingReservations);
+      } catch (error) {
+        console.error('Error al obtener y procesar las reservas:', error);
+      }
+    }
+
+    fetchAndProcessReservations();
   }, []);
 
   return (
     <DemoProvider>
-      <Component {...pageProps} />
+      <Component {...pageProps} reservations={reservations} />
     </DemoProvider>
   );
 }
+
+export default MyApp;
