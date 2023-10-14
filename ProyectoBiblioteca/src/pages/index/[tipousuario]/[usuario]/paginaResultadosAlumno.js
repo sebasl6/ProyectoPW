@@ -4,6 +4,7 @@ import { useState } from 'react';
 import LayoutCasoBusquedaAlumno from '@/components/LayoutCasoBusquedaAlumno';
 import { useRouter } from 'next/router';
 import Usuario from 'src/datos/usuario.json';
+import Chat from 'src/components/chatbot.js';
 
 const Principal = () => {
   const router = useRouter();
@@ -151,6 +152,7 @@ const Principal = () => {
           </div>
         </>
       } />
+      <Chat/>
     </>
   )
 }

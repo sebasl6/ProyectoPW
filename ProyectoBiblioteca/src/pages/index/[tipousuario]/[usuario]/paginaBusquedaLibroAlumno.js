@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import libraryData from 'src/datos/library.json';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import Chat from 'src/components/chatbot.js';
 
 const Principal = () => {
     const [datos, setDatos] = useState([])
@@ -338,6 +339,7 @@ const Principal = () => {
                     </>
                 }
             />
+            <Chat/>
         </>
     );
 };

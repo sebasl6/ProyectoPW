@@ -4,6 +4,7 @@ import Layout from '@/components/Layout'
 import { useRouter } from 'next/router';
 import Alumno from 'src/datos/usuario.json';
 import React, { useState, useEffect } from 'react';
+import Chat from 'src/components/chatbot.js';
 
 const Principal = () => {
   var data
@@ -354,6 +355,7 @@ const Principal = () => {
           </div>
         </>
       } />
+      <Chat/>
     </>
   )
 }

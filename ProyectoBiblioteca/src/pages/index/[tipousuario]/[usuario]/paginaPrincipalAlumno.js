@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Layout from '@/components/Layout'
 import { useRouter } from 'next/router';
+import Chat from 'src/components/chatbot.js';
 import Alumno from '/src/datos/usuario.json';
 import { useState, useEffect } from 'react';
 
@@ -126,6 +127,7 @@ const Principal = () => {
           </div>
         </>
       } />
+      <Chat/>
     </>
   )
 }
