@@ -43,11 +43,21 @@ const Principal = () => {
 
       reader.onload = (e) => {
         setImagenURL(e.target.result);
+        localStorage.setItem('imagenURL', e.target.result);
       };
 
       reader.readAsDataURL(file);
     }
   };
+
+  // Recuperar la URL de la imagen del almacenamiento local al cargar la página
+  useEffect(() => {
+    const storedImagenURL = localStorage.getItem('imagenURL');
+    if (storedImagenURL) {
+      setImagenURL(storedImagenURL);
+    }
+  }, []);
+
 
   // Estado local para los campos de entrada
   const [nombre, setNombre] = useState('');
@@ -71,6 +81,46 @@ const Principal = () => {
     }
   }, [alumnoEncontrado]);
 
+  
+  const actualizarDatosLocales=(nuevosDatos)=> {
+    setNombre(nuevosDatos.nombres);
+    setTipoDOC(nuevosDatos.tipoDocumento);
+    setApellidos(nuevosDatos.apellidos);
+    setNroDocumento(nuevosDatos.nroDocumento);
+    setCorreo(nuevosDatos.correo);
+    setPassword(nuevosDatos.password);
+  
+    // Actualiza la imagenURL solo si se proporciona una nueva imagen
+    if (nuevosDatos.imagenURL) {
+      setImagenURL(nuevosDatos.imagenURL);
+      localStorage.setItem('imagenURL', nuevosDatos.imagenURL);
+    }
+  };
+
+  const actualizarDatosRemotos = async (nuevosDatos) => {
+    if (alumnoEncontrado) {
+      const nuevosAlumnos = Object.values(Alumno).map((alumni) => {
+        if (alumni.correo === usuario) {
+          return { ...alumni, ...nuevosDatos };
+        }
+        return alumni;
+      });
+      // Realiza la solicitud para guardar el nuevo JSON en el servidor
+      const opciones = {
+        method: 'POST',
+        body: JSON.stringify(nuevosAlumnos),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+  
+      const peticion = await fetch('/api/actualizarAlumno/escribir', opciones);
+      const data = await peticion.json();
+      console.log(data);
+    }
+  };
+  
+  
   async function doLeer(){
     const opciones = {
       method : 'GET',
@@ -95,30 +145,6 @@ const Principal = () => {
       alert("El correo electronico ya existe. Por favor, inténte con otro.");
     }
   }
-  // Función para actualizar el archivo JSON con los nuevos datos
-  async function actualizarJSON(nuevosDatos) {
-    if (alumnoEncontrado) {
-      const nuevosAlumno = Alumno.map(alumni => {
-        if (alumni.correo === usuario) {
-          return { ...alumni, ...nuevosDatos };
-        }
-        return alumni;
-      });
-
-      // Realiza la solicitud para guardar el nuevo JSON en el servidor
-      const opciones = {
-        method: 'POST',
-        body: JSON.stringify(nuevosAlumno),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      const peticion = await fetch('/api/actualizarAlumno/escribir', opciones);
-      const data = await peticion.json();
-      console.log(data);
-    }
-  }
 
   // Maneja el clic en el botón "Guardar" para actualizar los datos
   async function handleGuardarClick () {
@@ -135,10 +161,13 @@ const Principal = () => {
       return error;
     }
 
-    // Llama a la función para actualizar el archivo JSON con los nuevos datos
-    actualizarJSON(nuevosDatos);
+    actualizarDatosLocales(nuevosDatos);
 
+  // Llama a la función para actualizar los datos en el servidor
+    actualizarDatosRemotos(nuevosDatos);
+    
     window.location.href = "/login";
+
   };
 
   async function handleGuardarClick1 () {
@@ -150,11 +179,14 @@ const Principal = () => {
       nroDocumento,
       imagenURL,
     };
-    // Llama a la función para actualizar el archivo JSON con los nuevos datos
-    actualizarJSON(nuevosDatos);
+    // Llama a la función para actualizar los datos localmente
+  actualizarDatosLocales(nuevosDatos);
+
+  // Llama a la función para actualizar los datos en el servidor
+  actualizarDatosRemotos(nuevosDatos);
+
     alert("Se ha registrado correctamente");   
 
-    window.location.href = "/login";
   };
 
 

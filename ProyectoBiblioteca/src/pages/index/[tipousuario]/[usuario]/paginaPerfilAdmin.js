@@ -49,6 +49,15 @@ const Principal = () => {
     }
   };
 
+    // Recuperar la URL de la imagen del almacenamiento local al cargar la página
+    useEffect(() => {
+      const storedImagenURL = localStorage.getItem('imagenURL');
+      if (storedImagenURL) {
+        setImagenURL(storedImagenURL);
+      }
+    }, []);
+
+
   // Estado local para los campos de entrada
   const [nombre, setNombre] = useState('');
   const [tipoDOC, setTipoDOC] = useState('');
@@ -76,6 +85,46 @@ const Principal = () => {
     }
   }, [administradorEncontrado]);
 
+  const actualizarDatosLocales=(nuevosDatos)=> {
+    setNombre(nuevosDatos.nombres);
+    setTipoDOC(nuevosDatos.tipoDocumento);
+    setApellidos(nuevosDatos.apellidos);
+    setNroDocumento(nuevosDatos.nroDocumento);
+    setCorreo(nuevosDatos.correo);
+    setPassword(nuevosDatos.password);
+  
+    // Actualiza la imagenURL solo si se proporciona una nueva imagen
+    if (nuevosDatos.imagenURL) {
+      setImagenURL(nuevosDatos.imagenURL);
+      localStorage.setItem('imagenURL', nuevosDatos.imagenURL);
+    }
+  };
+
+
+  const actualizarDatosRemotos = async (nuevosDatos) => {
+    if (alumnoEncontrado) {
+      const nuevosAlumnos = Object.values(Alumno).map((alumni) => {
+        if (alumni.correo === usuario) {
+          return { ...alumni, ...nuevosDatos };
+        }
+        return alumni;
+      });
+      // Realiza la solicitud para guardar el nuevo JSON en el servidor
+      const opciones = {
+        method: 'POST',
+        body: JSON.stringify(nuevosAlumnos),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      };
+  
+      const peticion = await fetch('/api/actualizarAlumno/escribir', opciones);
+      const data = await peticion.json();
+      console.log(data);
+    }
+  };
+
+
   async function doLeer(){
     const opciones = {
       method : 'GET',
@@ -101,30 +150,6 @@ const Principal = () => {
     }
   }
 
-  // Función para actualizar el archivo JSON con los nuevos datos
-  async function actualizarJSON(nuevosDatos) {
-    if (administradorEncontrado) {
-      const nuevosAdmins = Admins.map(admin => {
-        if (admin.correo === usuario) {
-          return { ...admin, ...nuevosDatos };
-        }
-        return admin;
-      });
-
-      // Realiza la solicitud para guardar el nuevo JSON en el servidor
-      const opciones = {
-        method: 'POST',
-        body: JSON.stringify(nuevosAdmins),
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      };
-
-      const peticion = await fetch('/api/actualizarAdmin/escribir', opciones);
-      const datitos = await peticion.json();
-      console.log(datitos);
-    }
-  }
 
   // Maneja el clic en el botón "Guardar" para actualizar los datos
 async function handleGuardarClick() {
@@ -141,7 +166,10 @@ async function handleGuardarClick() {
       return error;
     }
 
-    await actualizarJSON(nuevosDatos);
+    actualizarDatosLocales(nuevosDatos);
+
+  // Llama a la función para actualizar los datos en el servidor
+    actualizarDatosRemotos(nuevosDatos);
     
     window.location.href = "/login";
   };
@@ -157,10 +185,15 @@ async function handleGuardarClick() {
       imagenURL,
     };
   
-    actualizarJSON(nuevosDatos);
-    alert("Se ha actualizado correctamente");
-    window.location.href = "/login";
-  };
+    // Llama a la función para actualizar los datos localmente
+    actualizarDatosLocales(nuevosDatos);
+
+    // Llama a la función para actualizar los datos en el servidor
+    actualizarDatosRemotos(nuevosDatos);
+  
+      alert("Se ha registrado correctamente");   
+  
+    };
 
   const handleGuardarClick3 = () => {
     const nuevosDatos = {
@@ -168,11 +201,15 @@ async function handleGuardarClick() {
       prefijo,
       color,
     };
-  
-    actualizarJSON(nuevosDatos);
-    alert("Se ha actualizado correctamente");
-    window.location.href = "/login";
-  };
+      // Llama a la función para actualizar los datos localmente
+      actualizarDatosLocales(nuevosDatos);
+
+      // Llama a la función para actualizar los datos en el servidor
+      actualizarDatosRemotos(nuevosDatos);
+    
+        alert("Se ha registrado correctamente");   
+    
+      };
 
   //logica para cambiar de opcion
   const [opcionSeleccionada, setOpcionSeleccionada] = useState('datosPersonales'); // Estado para la opción seleccionada
