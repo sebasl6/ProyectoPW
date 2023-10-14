@@ -28,7 +28,12 @@ const PaginaDestino = () => {
 
 
     const [showCalendar, setShowCalendar] = useState(false);
-    const [selectedDate, setSelectedDate] = useState(null);
+    const [selectedDate, setSelectedDate] = useState(null)
+
+    const onChange = (date) => {
+        const start = date;
+        setSelectedDate(start);
+    }
 
     const toggleCalendar = () => {
         setShowCalendar(!showCalendar);
@@ -182,7 +187,9 @@ const PaginaDestino = () => {
                                 <h1>Seleccion Fecha</h1>
                                 <DatePicker
                                     selected={selectedDate}
-                                    onChange={(date) => setSelectedDate(date)}
+                                    onChange={onChange}
+                                    startDate={selectedDate}
+                                    inline
                                     dateFormat="dd/MM/yyyy"
                                 />
                                 <h1></h1>

@@ -67,13 +67,17 @@ const Principal = () => {
 
     //---------------------------CALENDARIO-----------------------------------------
 
-    const [showCalendar, setShowCalendar] = useState(false);
     const [selectedDate, setSelectedDate] = useState(new Date());
+    const [endDate, setEndDate] = useState(null);
 
-    const toggleCalendar = () => {
-        setShowCalendar(!showCalendar);
+    const [showCalendar, setShowCalendar] = useState(false);
+
+    const onChange = (dates) => {
+        const start = dates;
+        const end = dates;
+        setSelectedDate(start);
+        setEndDate(end);
     };
-
     //-------------------------------------------------------------------------------
 
     const [flag, setFlag] = useState(false);
@@ -317,8 +321,13 @@ const Principal = () => {
                             <div className="confirmacion-fondo">
                                 <div className="seccion-confirmacion-2">
                                     <h1>Calendario</h1>
-                                    
-                                    <DatePicker selected={selectedDate} onChange={(date) => setSelectedDate(date)} className="date"/>
+                                    <DatePicker 
+                                        selected={selectedDate} 
+                                        onChange={onChange}
+                                        startDate={selectedDate}
+                                        endDate={endDate}
+                                        inline   
+                                        />
                                     <p>Fecha seleccionada: {selectedDate.toDateString()}</p>
                                     <button className = "buttonfecha "  onClick={registrarReserva}>OK</button>
                                     <button className = "buttonfecha " onClick={() => setFlag(false)}>Cancel</button>
