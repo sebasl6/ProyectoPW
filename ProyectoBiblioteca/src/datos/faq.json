@@ -1,0 +1,43 @@
+[
+    {
+      "id": "1",
+      "message": "Hola, ¿cómo puedo ayudarte?",
+      "trigger": "2"
+    },
+    {
+      "id": "2",
+      "message": "¿Qué servicios ofrecen en su sitio web?",
+      "trigger": "3"
+    },
+    {
+      "id": "3",
+      "message": "Ofrecemos servicios de reserva de libros y búsqueda de bibliotecas cercanas. ¿En qué más puedo ayudarte?",
+      "trigger": "4"
+    },
+    {
+      "id": "4",
+      "message": "¿Cómo puedo reservar un libro?",
+      "trigger": "5"
+    },
+    {
+      "id": "5",
+      "message": "Puedes reservar un libro después de iniciar sesión en tu cuenta. Visita la página de 'Reservar Libro' y sigue las instrucciones allí.",
+      "trigger": "6"
+    },
+    {
+      "id": "6",
+      "message": "¿Cómo puedo restablecer mi contraseña?",
+      "trigger": "7"
+    },
+    {
+      "id": "7",
+      "message": "Para restablecer tu contraseña, ve a la página de inicio de sesión y haz clic en '¿Olvidaste tu contraseña?'. Luego, sigue las instrucciones para restablecer tu contraseña.",
+      "trigger": "8"
+    },
+    {
+      "id": "8",
+      "message": "Gracias por tu ayuda.",
+      "end": true
+    }
+  ]
+  
