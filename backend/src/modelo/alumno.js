@@ -1,5 +1,5 @@
-import { DataTypes } from 'sequelize'
-import sequelize from '../config/database.js'
+import { DataTypes } from 'sequelize';
+import sequelize from '../config/database.js';
 
 const Alumno = sequelize.define('alumno', {
     id: {
@@ -30,6 +30,10 @@ const Alumno = sequelize.define('alumno', {
     imagenURL:{
         type: DataTypes.STRING,
         allowNull: true
+    },
+    esAdmin:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
 });
 

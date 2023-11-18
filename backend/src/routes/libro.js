@@ -1,6 +1,6 @@
 import express from 'express'
 
-import controller from '../controllers/alumno.js'
+import controller from '../controllers/libro.js'
 
 const routes = express.Router()
 
