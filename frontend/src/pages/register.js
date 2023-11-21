@@ -6,9 +6,9 @@ import userApi from './api/alumno.js'; // Ajusta la ruta a tu ubicación real
 const Formulario = () => {
   const [isValid, setIsValid] = useState(true);
   const [state, setState] = useState({
-    nombres: "",
+    nombre: "",
     apellidos: "",
-    tipoDocumento: "",
+    tipoDOC: "",
     nroDocumento: "",
     correo: "",
     password: "",
@@ -49,9 +49,9 @@ const Formulario = () => {
   
       // Crear un nuevo usuario
       const newUser = {
-        nombres: state.nombres,
+        nombre: state.nombre,
         apellidos: state.apellidos,
-        tipoDocumento: state.tipoDocumento,
+        tipoDOC: state.tipoDOC,
         nroDocumento: state.nroDocumento,
         correo: state.correo,
         password: state.password,
@@ -82,14 +82,14 @@ const Formulario = () => {
             <div className="column">
               <div className="columna-subtitulo">Datos personales</div>
               <div className="input-container">
-                <label className="form-label" htmlFor="nombres">Nombres:</label>
+                <label className="form-label" htmlFor="nombre">Nombres:</label>
                 <input
                   className="form-input"
                   type="text"
-                  id="nombres"
-                  name="nombres"
+                  id="nombre"
+                  name="nombre"
                   onChange={mngmtChange}
-                  value={state.nombres}
+                  value={state.nombre}
                   required
                 />
               </div>
@@ -106,14 +106,14 @@ const Formulario = () => {
                 />
               </div>
               <div className="input-container">
-                <label className="form-label" htmlFor="tipoDocumento">Tipo de Documento:</label>
+                <label className="form-label" htmlFor="tipoDOC">Tipo de Documento:</label>
                 <input
                   className="form-input"
                   type="text"
-                  id="tipoDocumento"
-                  name="tipoDocumento"
+                  id="tipoDOC"
+                  name="tipoDOC"
                   onChange={mngmtChange}
-                  value={state.tipoDocumento}
+                  value={state.tipoDOC}
                   required
                 />
               </div>
