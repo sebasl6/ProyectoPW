@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import Head from 'next/head';
 import { useState } from "react";
+import userApi from './api/alumno.js'; // Ajusta la ruta a tu ubicación real
 
 const Formulario = () => {
-  // Se utiliza para determinar si las contraseñas coninciden
   const [isValid, setIsValid] = useState(true);
-  // Almacena los datos del formulario como nombres apellido....
   const [state, setState] = useState({
     nombres: "",
     apellidos: "",
@@ -16,100 +15,63 @@ const Formulario = () => {
     repetirPassword: ""
   });
 
-  function mngmtChange(e) {
-    console.log(e.target.name, e.target.value);
+  const mngmtChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   }
-  //Se llama cuando se envia el formulario
-  async function mngmtSubmit(e) {
-    e.preventDefault();
 
-    // Lógica para manejar la validación de contraseña
+  const mngmtSubmit = async (e) => {
+    e.preventDefault();
+  
     if (state.password !== state.repetirPassword) {
       setIsValid(false);
       alert('No coincide la contraseña');
       return;
     }
+  
     setIsValid(true);
-    // Crea un fromdrata con los datos del formulario
-    let formData = new FormData();
-    for (let [key, value] of Object.entries(state)) {
-      formData.append(key, value);
-    }
-    
-    console.log(formData);
-
-    // Redirigir a la página "/login" si las contraseñas coinciden
-    if (e.nativeEvent.submitter.classList.contains('register-button')) {
-      try {
-        //Llama a la funcion doescribir para guardar el nuevo usuario en la base de datos 
-        await doEscribir();
-        alert("Se ha registrado correctamente");
-        window.location.href = "/login";
-      } catch (error) {
-        console.error("Error al registrar el usuario:", error);
+  
+    console.log("Datos del usuario:", state);
+  
+    try {
+      // Obtener la lista de usuarios existentes
+      const existingUsersResponse = await userApi.findAll();
+      console.log("Respuesta de la API:", existingUsersResponse);
+  
+      // Asegúrate de que existingUsersResponse sea un array antes de intentar usar find.
+      const existingUsers = Array.isArray(existingUsersResponse) ? existingUsersResponse : [];
+  
+      // Verificar si el correo ya existe
+      const correoExistente = existingUsers.find((user) => user.correo === state.correo);
+      if (correoExistente) {
         alert("El correo electrónico ya existe. Por favor, inténtalo con otro.");
+        return;
       }
+  
+      // Crear un nuevo usuario
+      const newUser = {
+        nombres: state.nombres,
+        apellidos: state.apellidos,
+        tipoDocumento: state.tipoDocumento,
+        nroDocumento: state.nroDocumento,
+        correo: state.correo,
+        password: state.password,
+        repetirPassword: state.repetirPassword,
+      };
+  
+      console.log("Nuevo usuario:", newUser);
+  
+      // Guardar nuevo usuario
+      await userApi.add(newUser);
+  
+      alert("Se ha registrado correctamente");
+      window.location.href = "/login";
+    } catch (error) {
+      console.error("Error al registrar el usuario:", error);
+      alert("Hubo un error al registrar el usuario. Por favor, inténtalo de nuevo.");
     }
   }
-  //Realiza una solicitud Get al API para obtener datos del usuario 
-  async function doLeer() {
-    const opciones = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-
-    const peticion = await fetch('api/actualizarRegistros/leerUsuario', opciones);
-    const data = await peticion.json();
-    console.log(data);
-    return data;
-  }
-  //Agrega un nuevo usuario a los datos existentes y realiza una solicitud Post para guardar los datos
-  // en la base de datos. Si el correo no existe da error
-  async function doEscribir() {
-    const {
-      nombres,
-      apellidos,
-      tipoDocumento,
-      nroDocumento,
-      correo,
-      password,
-      repetirPassword,
-    } = state;
-
-    let data = await doLeer();
-
-    const correoExistente = data.find((user) => user.correo === correo);
-    if (correoExistente) {
-      return error;
-    }
-
-    let nuevo = {
-      "nombres": nombres,
-      "apellidos": apellidos,
-      "tipoDocumento": tipoDocumento,
-      "nroDocumento": nroDocumento,
-      "correo": correo,
-      "password": password,
-      "repetirPassword": repetirPassword,
-    };
-
-    data.push(nuevo);
-
-    // Grabar usuario
-    const opciones = {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { 'Content-Type': 'application/json' }
-    }
-
-    const peticion = await fetch('api/actualizarRegistros/escribirUsuario', opciones);
-    const responseData = await peticion.json();
-    console.log(responseData);
-  }
-
+  
+  
   return (
     <>
       <div className="title">Sistema de Reserva de Libros</div>
@@ -218,4 +180,3 @@ const Formulario = () => {
 }
 
 export default Formulario;
-

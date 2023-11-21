@@ -1,0 +1,10 @@
+POST http://localhost:3001/autor
+Content-Type: application/json
+
+{
+    "nombre": "Juan",
+    "apellido": "Lopez"
+}
+####
+REMOVE http://localhost:3001/autor
+Content-Type: application/json

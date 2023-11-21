@@ -1,0 +1,10 @@
+GET http://localhost:3001/libro
+#######
+POST http://localhost:3001/libro
+Content-Type: application/json
+
+{
+    "nombre": "Juan",
+    "apellido": "Lopez",
+    "idCarrera": 1
+}
