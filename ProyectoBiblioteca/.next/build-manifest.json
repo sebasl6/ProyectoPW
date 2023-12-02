@@ -1,0 +1,42 @@
+{
+  "polyfillFiles": [
+    "static/chunks/polyfills.js"
+  ],
+  "devFiles": [
+    "static/chunks/react-refresh.js"
+  ],
+  "ampDevFiles": [],
+  "lowPriorityFiles": [
+    "static/development/_buildManifest.js",
+    "static/development/_ssgManifest.js"
+  ],
+  "rootMainFiles": [],
+  "pages": {
+    "/_app": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_app.js"
+    ],
+    "/_error": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/_error.js"
+    ],
+    "/index/[tipousuario]/[usuario]/paginaPerfilAlumno": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index/[tipousuario]/[usuario]/paginaPerfilAlumno.js"
+    ],
+    "/index/[tipousuario]/[usuario]/paginaPrincipalAlumno": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index/[tipousuario]/[usuario]/paginaPrincipalAlumno.js"
+    ],
+    "/index/[tipousuario]/[usuario]/paginaResultadosAlumno": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/index/[tipousuario]/[usuario]/paginaResultadosAlumno.js"
+    ]
+  },
+  "ampFirstPages": []
+}

@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 });
 
 // Middleware para las rutas de autenticación de alumnos
-app.use("/login", loginRoutes);
+app.use("/auth/alumno", loginRoutes);
 
 // Rutas para otras partes de la aplicación
 app.use("/alumno", alumnoRoutes);

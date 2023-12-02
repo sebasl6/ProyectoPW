@@ -12,9 +12,9 @@ async function main() {
             await sequelize.sync({force: false})
 
         console.log('conexión exitosa!')
-
-        app.listen(3001, () => {
-            console.log('Servidor iniciado. Escuchando en puerto 3001')
+        const port = process.env.PORT || 3001
+        app.listen(port, () => {
+            console.log(`Server escuchando en el port::${port}`);
         })
 
     } catch(err) {

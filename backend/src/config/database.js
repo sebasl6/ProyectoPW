@@ -1,9 +1,9 @@
 import Sequelize from 'sequelize';
 
-const hostname = '127.0.0.1';
-const username = 'postgres';
-const password = '123'; // Reemplaza 'tu_contraseña' con la contraseña real
-const database = 'postgres'; // Reemplaza 'postgres' con el nombre real de tu base de datos
+const hostname = 'pw-proyectofinal-grupo6-db.postgres.database.azure.com';
+const username = 'postgre';
+const password = 'Contrasena123'; 
+const database = 'reserva'; 
 const dbPort = 5432;
 const dialect = 'postgres';
 

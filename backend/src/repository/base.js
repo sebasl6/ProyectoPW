@@ -107,7 +107,7 @@ class RepositoryBase {
           return null;
         }
       };
-      authenticate = async (correo, password) => {
+      login = async (correo, password) => {
         try {
           return await this.modelo.findOne({
             where: { correo, password }
