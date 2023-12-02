@@ -21,32 +21,33 @@ const Formulario = () => {
 
   const mngmtSubmit = async (e) => {
     e.preventDefault();
-  
+
     if (state.password !== state.repetirPassword) {
       setIsValid(false);
       alert('No coincide la contraseña');
       return;
     }
-  
+
     setIsValid(true);
-  
+
     console.log("Datos del usuario:", state);
-  
+
     try {
       // Obtener la lista de usuarios existentes
       const existingUsersResponse = await userApi.findAll();
       console.log("Respuesta de la API:", existingUsersResponse);
-  
+
       // Asegúrate de que existingUsersResponse sea un array antes de intentar usar find.
       const existingUsers = Array.isArray(existingUsersResponse) ? existingUsersResponse : [];
-  
+
       // Verificar si el correo ya existe
       const correoExistente = existingUsers.find((user) => user.correo === state.correo);
+
       if (correoExistente) {
-        alert("El correo electrónico ya existe. Por favor, inténtalo con otro.");
+        alert(`El correo electrónico '${state.correo}' ya está registrado. Por favor, utiliza otro.`);
         return;
       }
-  
+
       // Crear un nuevo usuario
       const newUser = {
         nombre: state.nombre,
@@ -57,21 +58,21 @@ const Formulario = () => {
         password: state.password,
         repetirPassword: state.repetirPassword,
       };
-  
+
       console.log("Nuevo usuario:", newUser);
-  
-      // Guardar nuevo usuario
+
+      // Guardar nuevo usuario solo si el correo no existe
       await userApi.add(newUser);
-  
+
+      // Redirigir solo después de un registro exitoso
       alert("Se ha registrado correctamente");
       window.location.href = "/login";
     } catch (error) {
       console.error("Error al registrar el usuario:", error);
       alert("Hubo un error al registrar el usuario. Por favor, inténtalo de nuevo.");
     }
-  }
-  
-  
+  };
+
   return (
     <>
       <div className="title">Sistema de Reserva de Libros</div>

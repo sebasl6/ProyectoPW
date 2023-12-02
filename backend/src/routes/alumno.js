@@ -1,13 +1,15 @@
-import express from 'express'
+import express from 'express';
+import alumnoController from '../controllers/alumno.js';
 
-import controller from '../controllers/alumno.js'
+const router = express.Router();
 
-const routes = express.Router()
+router.get('/', alumnoController.findAll);
+router.post('/', alumnoController.create);
+router.get('/:id', alumnoController.findOne);
+router.put('/', alumnoController.update);
+router.delete('/:id', alumnoController.remove);
 
-routes.get('/', controller.findAll ) 
-routes.post('/', controller.create )
-routes.get('/:id', controller.findOne )
-routes.put('/', controller.update )
-routes.delete('/:id', controller.remove)
+// Nueva ruta para buscar alumno por correo
+router.get('/by-correo/:correo', alumnoController.findAlumnoByCorreo);
 
-export default routes
+export default router;

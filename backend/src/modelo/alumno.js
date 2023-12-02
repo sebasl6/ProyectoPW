@@ -18,7 +18,8 @@ const Alumno = sequelize.define('alumno', {
         type: DataTypes.STRING
     },
     nroDocumento: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
     },
     correo:{
         type: DataTypes.STRING,

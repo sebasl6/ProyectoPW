@@ -1,44 +1,52 @@
 import Link from 'next/link';
-//Gestiona el estado del formulario de inicio de seccion
-import { useState } from "react";
-//Accede a la informacion de la ruta actual
+import { useState } from 'react';
 import { useRouter } from 'next/router';
-// Contiene la informacion sobre administrador y usuario
-import Administradores from '/src/datos/administradores.json';
-import Usuarios from '/src/datos/usuario.json';
-// Se almacena los valores del usuario y contraseña del formulario
+import userApi from './api/alumno.js';
+
 const Login = () => {
   const [formData, setFormData] = useState({
-    usuario: "",
-    contrasena: "",
+    usuario: '',
+    contrasena: '',
   });
+
+  const [isValid, setIsValid] = useState(true);
   const router = useRouter();
-//Captura los cambios en los campos de entrada del formulario y actualiza el estado de formdata
-  function handleInputChange(e) {
+
+  const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  }
-//Se obtiee los valores del usuario y la contraseña del estado formdata
+  };
+
   const handleLogin = async (e) => {
     e.preventDefault();
-    const { usuario, contrasena } = formData;
 
-    const admin = Object.values(Administradores).find(
-      admin => admin.correo === usuario && admin.contrasena === contrasena
-    );
-
-    const user = Object.values(Usuarios).find(
-      user => user.correo === usuario && user.password === contrasena
-    );
-
-    if (admin) {
-      router.push(`/index/admin/${admin.correo}/paginaPrincipalAdmin`);
-    } else if (user && user.correo === usuario && user.password === contrasena) {
-      router.push(`/index/alumno/${user.correo}/paginaPrincipalAlumno`);
-    } else {
-      alert('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+    if (!validateForm()) {
+      setIsValid(false);
+      return;
     }
-  }
+
+    try {
+      const response = await userApi.login({
+        correo: formData.usuario,
+        password: formData.contrasena,
+      });
+
+      if (response && response.ok) {
+        const userType = response.data.esAdmin ? 'admin' : 'alumno';
+        router.push(`/index/${userType}/${response.data.correo}/paginaPrincipal${userType.charAt(0).toUpperCase() + userType.slice(1)}`);
+      } else {
+        alert('Credenciales incorrectas. Por favor, inténtalo de nuevo.');
+      }
+    } catch (error) {
+      console.error('Error al autenticar:', error);
+      alert('Hubo un error al autenticar. Por favor, inténtalo de nuevo.');
+    }
+  };
+
+  const validateForm = () => {
+    const { usuario, contrasena } = formData;
+    return usuario.trim() !== '' && contrasena.trim() !== '';
+  };
 
   return (
     <div className="container">
@@ -69,6 +77,7 @@ const Login = () => {
               required
             />
           </div>
+          {!isValid && <p className="error-message">Por favor, completa todos los campos.</p>}
           <div className="button-container">
             <Link href="/register">
               <button className="login-button">Registrar usuario</button>
@@ -79,7 +88,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Login;
-

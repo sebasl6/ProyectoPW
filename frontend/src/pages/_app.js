@@ -10,6 +10,8 @@ import '../styles/estilos6.css';
 import '../styles/cards.css';
 
 import { DemoProvider } from './context/demo';
+import alumnoApi from './api/alumno';  // Ajusta la ruta según tu estructura
+import libroApi from './api/libro';  // Ajusta la ruta según tu estructura
 
 function MyApp({ Component, pageProps }) {
   const [reservations, setReservations] = useState([]);
@@ -17,26 +19,16 @@ function MyApp({ Component, pageProps }) {
   useEffect(() => {
     async function fetchAndProcessReservations() {
       try {
-        const fetchDataOptions = {
-          method: 'GET',
-          headers: { 'Content-Type': 'application/json' },
-        };
+        // Cambia la siguiente línea para usar tu nueva función de API
+        const response = await alumnoApi.findAll();
 
-        const response = await fetch('/api/actualizarReserva/leer', fetchDataOptions);
-        const rawData = await response.json();
-
+        // Tu lógica para procesar las reservas aquí...
         const currentDate = new Date();
-        const upcomingReservations = rawData.filter(reservation => new Date(reservation.fechaentrega) >= currentDate);
+        const upcomingReservations = response.filter(reservation => new Date(reservation.fechaentrega) >= currentDate);
 
-        const writeDataOptions = {
-          method: 'POST',
-          body: JSON.stringify(upcomingReservations),
-          headers: { 'Content-Type': 'application/json' },
-        };
-
-        const writeResponse = await fetch('/api/actualizarReserva/escribir', writeDataOptions);
-        const result = await writeResponse.json();
-        console.log(result);
+        // Cambia la siguiente línea para usar tu nueva función de API
+        const writeResponse = await alumnoApi.add(upcomingReservations);
+        console.log(writeResponse);
 
         setReservations(upcomingReservations);
       } catch (error) {
@@ -55,4 +47,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
-
